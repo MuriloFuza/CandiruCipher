@@ -14,6 +14,35 @@ class CandiruCipher:
     self.messagePolyalphabetic = []
     self.messageFlow = []
     self.calc = 0
+    self.table = [
+      ['a', ' ','z','y','x','w','v','u','t','s','r','q','p','o','n','m','l','k','j','i','h','g','f','e','d','c','b'],
+      ['b','a', ' ','z','y','x','w','v','u','t','s','r','q','p','o','n','m','l','k','j','i','h','g','f','e','d','c'],
+      ['c','b','a', ' ','z','y','x','w','v','u','t','s','r','q','p','o','n','m','l','k','j','i','h','g','f','e','d'],
+      ['d','c','b','a', ' ','z','y','x','w','v','u','t','s','r','q','p','o','n','m','l','k','j','i','h','g','f','e'],
+      ['e','d','c','b','a', ' ','z','y','x','w','v','u','t','s','r','q','p','o','n','m','l','k','j','i','h','g','f'],
+      ['f','e','d','c','b','a', ' ','z','y','x','w','v','u','t','s','r','q','p','o','n','m','l','k','j','i','h','g'],
+      ['g','f','e','d','c','b','a', ' ','z','y','x','w','v','u','t','s','r','q','p','o','n','m','l','k','j','i','h'],
+      ['h','g','f','e','d','c','b','a', ' ','z','y','x','w','v','u','t','s','r','q','p','o','n','m','l','k','j','i'],
+      ['i','h','g','f','e','d','c','b','a', ' ','z','y','x','w','v','u','t','s','r','q','p','o','n','m','l','k','j'],
+      ['j','i','h','g','f','e','d','c','b','a', ' ','z','y','x','w','v','u','t','s','r','q','p','o','n','m','l','k'],
+      ['k','j','i','h','g','f','e','d','c','b','a', ' ','z','y','x','w','v','u','t','s','r','q','p','o','n','m','l'],
+      ['l','k','j','i','h','g','f','e','d','c','b','a', ' ','z','y','x','w','v','u','t','s','r','q','p','o','n','m'],
+      ['m','l','k','j','i','h','g','f','e','d','c','b','a', ' ','z','y','x','w','v','u','t','s','r','q','p','o','n'],    
+      ['n','m','l','k','j','i','h','g','f','e','d','c','b','a', ' ','z','y','x','w','v','u','t','s','r','q','p','o'],
+      ['o','n','m','l','k','j','i','h','g','f','e','d','c','b','a', ' ','z','y','x','w','v','u','t','s','r','q','p'],
+      ['p','o','n','m','l','k','j','i','h','g','f','e','d','c','b','a', ' ','z','y','x','w','v','u','t','s','r','q'],
+      ['q','p','o','n','m','l','k','j','i','h','g','f','e','d','c','b','a', ' ','z','y','x','w','v','u','t','s','r'],
+      ['r','q','p','o','n','m','l','k','j','i','h','g','f','e','d','c','b','a', ' ','z','y','x','w','v','u','t','s'],
+      ['s','r','q','p','o','n','m','l','k','j','i','h','g','f','e','d','c','b','a', ' ','z','y','x','w','v','u','t'],
+      ['t','s','r','q','p','o','n','m','l','k','j','i','h','g','f','e','d','c','b','a', ' ','z','y','x','w','v','u'],
+      ['u','t','s','r','q','p','o','n','m','l','k','j','i','h','g','f','e','d','c','b','a', ' ','z','y','x','w','v'],
+      ['v','u','t','s','r','q','p','o','n','m','l','k','j','i','h','g','f','e','d','c','b','a', ' ','z','y','x','w'],
+      ['w','v','u','t','s','r','q','p','o','n','m','l','k','j','i','h','g','f','e','d','c','b','a', ' ','z','y','x'],
+      ['x','w','v','u','t','s','r','q','p','o','n','m','l','k','j','i','h','g','f','e','d','c','b','a', ' ','z','y'],
+      ['y','x','w','v','u','t','s','r','q','p','o','n','m','l','k','j','i','h','g','f','e','d','c','b','a', ' ','z'],
+      ['z','y','x','w','v','u','t','s','r','q','p','o','n','m','l','k','j','i','h','g','f','e','d','c','b','a', ' '],
+      [' ','z','y','x','w','v','u','t','s','r','q','p','o','n','m','l','k','j','i','h','g','f','e','d','c','b','a'],    
+    ]
     self.positionLetter = { 
                            0: 'a',
                            1: 'b',
@@ -43,91 +72,7 @@ class CandiruCipher:
                            25 :'z',
                            26 :' '
                            }
-    self.table = [
-      #A
-      ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 
-       's','t', 'u', 'v','w', 'x', 'y', 'z', ' '],
-      #B
-      [' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q',
-       'r', 's','t', 'u', 'v','w', 'x', 'y', 'z'],
-      #C
-      ['z' ,' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 
-       'q', 'r', 's','t', 'u', 'v','w', 'x', 'y'],
-      #D
-      ['y', 'z' ,' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o',
-       'p', 'q', 'r', 's','t', 'u', 'v','w', 'x' ],
-      #E
-      ['x' ,'y', 'z' ,' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 
-       'o', 'p', 'q', 'r','s','t', 'u', 'v','w' ],
-      #F
-      ['w' ,'x' ,'y', 'z' ,' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 
-       'n', 'o', 'p', 'q', 'r', 's','t', 'u', 'v'],
-      #G
-      ['v', 'w' ,'x' ,'y', 'z' ,' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 
-       'm', 'n', 'o', 'p', 'q', 'r', 's','t', 'u'],
-      #H
-      ['u','v', 'w' ,'x' ,'y', 'z' ,' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 
-       'l', 'm', 'n', 'o', 'p', 'q', 'r', 's','t'],
-      #I
-      ['t','u','v', 'w' ,'x' ,'y', 'z' ,' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 
-       'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r','s'],
-      #J
-      ['s', 't','u','v', 'w' ,'x' ,'y', 'z' ,' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 
-       'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r'],
-      #k
-      ['r','s', 't','u','v', 'w' ,'x' ,'y', 'z' ,' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 
-       'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q'],
-      #L
-      ['q','r','s', 't','u','v', 'w' ,'x' ,'y', 'z' ,' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 
-       'j', 'k', 'l', 'm', 'n', 'o', 'p'],
-      #M
-      ['p', 'q','r','s', 't','u','v', 'w' ,'x' ,'y', 'z' ,' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 
-       'j', 'k', 'l', 'm', 'n', 'o' ],
-      #N
-      ['o', 'p', 'q','r','s', 't','u','v', 'w' ,'x' ,'y', 'z' ,' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 
-       'j', 'k', 'l', 'm', 'n'],
-      #O
-      ['n', 'o', 'p', 'q','r','s', 't','u','v', 'w' ,'x' ,'y', 'z' ,' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 
-       'j', 'k', 'l', 'm' ],
-      #P
-      [ 'm', 'n', 'o', 'p', 'q','r','s', 't','u','v', 'w' ,'x' ,'y', 'z' ,' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 
-       'j', 'k', 'l' ],
-      #Q
-      ['l', 'm', 'n', 'o', 'p', 'q','r','s', 't','u','v', 'w' ,'x' ,'y', 'z' ,' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 
-       'j', 'k'],
-      #R
-      ['k', 'l', 'm', 'n', 'o', 'p', 'q','r','s', 't','u','v', 'w' ,'x' ,'y', 'z' ,' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 
-       'j'],
-      #S
-      ['j', 'k', 'l', 'm', 'n', 'o', 'p', 'q','r','s', 't','u','v', 'w' ,'x' ,'y', 'z' ,' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 
-       ],
-      #T
-      ['i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q','r','s', 't','u','v', 'w' ,'x' ,'y', 'z' ,' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 
-       ],
-      #U
-      ['h','i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q','r','s', 't','u','v', 'w' ,'x' ,'y', 'z' ,' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 
-       ],
-      #V
-      ['g', 'h','i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q','r','s', 't','u','v', 'w' ,'x' ,'y', 'z' ,' ', 'a', 'b', 'c', 'd', 'e', 'f', 
-       ],
-      #W
-      ['f','g', 'h','i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q','r','s', 't','u','v', 'w' ,'x' ,'y', 'z' ,' ', 'a', 'b', 'c', 'd', 'e',  
-       ],
-      #X
-      ['e', 'f','g', 'h','i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q','r','s', 't','u','v', 'w' ,'x' ,'y', 'z' ,' ', 'a', 'b', 'c', 'd',  
-       ],
-      #Y
-      ['d','e', 'f','g', 'h','i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q','r','s', 't','u','v', 'w' ,'x' ,'y', 'z' ,' ', 'a', 'b', 'c',   
-       ],
-      #Z
-      [ 'c', 'd','e', 'f','g', 'h','i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q','r','s', 't','u','v', 'w' ,'x' ,'y', 'z' ,' ', 'a', 'b',  
-       ],
-      #' '
-      ['b', 'c', 'd','e', 'f','g', 'h','i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q','r','s', 't','u','v', 'w' ,'x' ,'y', 'z' ,' ', 'a',  
-       ],
-      
-    ]
-  
+    
   def railFenceCipher(self):
     self.calc = len(self.encryptingMessage) / len(self.keyGlobal)
     
@@ -149,10 +94,15 @@ class CandiruCipher:
       self.messageRailFence.append(temp)
       
     
+    if(len(self.messageRailFence[-1]) < len(self.keyGlobal)):
+      calc = len(self.keyGlobal) - len(self.messageRailFence[-1]) 
+      for i in range(calc):
+        self.messageRailFence[-1].append('*')
+                
     # colocar na ordem encriptada
     guard = 0
     for i in range(len(self.messageRailFence)):
-      temp = [0]*len(self.messageRailFence[i])
+      temp = [' ']*len(self.messageRailFence[i])
       for k in range((len(self.messageRailFence[i]))):
         if(guard <= limit):
           key = self.keyGlobal[k]
@@ -184,7 +134,7 @@ class CandiruCipher:
       
       if(guard == len(self.messageRailFence)):
         guard = -1
-                                   
+                                           
     # concatenar o resultado final
     aux = ''
     count = len(self.messageRailFence[0])
@@ -210,7 +160,8 @@ class CandiruCipher:
       for i in range(len(self.keyGlobal)):
         if(guard < limit):
           pos = list(self.positionLetter.keys())[list(self.positionLetter.values()).index(aux[guard])]
-          self.messagePolyalphabetic.append(self.table[pos][self.keyGlobal[i]]) 
+          calc = len(self.table[0]) - (self.keyGlobal[i] % len(self.table[0]) ) 
+          self.messagePolyalphabetic.append(self.table[pos][calc]) 
           guard += 1
   
     self.messagePolyalphabetic = "".join(self.messagePolyalphabetic)
