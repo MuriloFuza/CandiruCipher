@@ -116,7 +116,7 @@ class CandiruCipher:
                 key = int(key / len(temp))
               else:
                 guard = 1
-               
+          
           temp[key - 1] = letter
         guard += 1 
       self.messageRailFence[i] = temp
@@ -173,11 +173,8 @@ class CandiruCipher:
     pos = 0
     
     for c in self.messagePolyalphabetic:
-      result = (ord(c) ^ self.keyGlobal[pos]) ^ self.keyFlow
+      result = (ord(c) ^ self.keyGlobal[pos % len(self.keyGlobal)]) ^ self.keyFlow
       pos += 1
-      if(pos >= len(self.keyGlobal)):
-        pos = 0
-        
       final += chr(result)
     print(final)
   
