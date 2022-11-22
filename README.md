@@ -44,5 +44,8 @@ E por fim cifre a saída do passo 2 utilizando a Cifra Fluxo em cada caracter, 
 from candiruCipher import CandiruCipher
 
 candiruCipher = CandiruCipher()
-CandiruCipher.encrypt(self=candiruCipher, message='texto qualquer', key='4,3,1,2')
+messageEncrypted = candiruCipher.encrypt(message='texto qualquer', key='4,3,1,2')
+
+print(messageEncrypted)
+# ŪŸżůųŴŸůŢůţŹųžŬŪ
 ```

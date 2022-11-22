@@ -1,4 +1,10 @@
 from candiruCipher import CandiruCipher
 
 candiruCipher = CandiruCipher()
-CandiruCipher.encrypt(self=candiruCipher, message='transmission third world war third round a decade of the weapon of sound above ground no shelter if you are lookin for shade i lick shots at the brutal charade as the polls close like a casket on truth devoured a silent play in the shadow of power a spectacle monopolized the cameras eyes on choice disguised was it cast for the mass who burn and toil or for the vultures who thirst for blood and oil yes a spectacle monopolized they hold the reins and stole your eyes or the fistagons the bullets and bombs who stuff the banks who staff the party ranks more for gore or the son of a drug lord none of the above fuck it cut the cord lights out guerrilla radio turn that shit up', key='9,6,4,3,8,1,7,2,5,10,11')
+messageEncrypted = candiruCipher.encrypt(message='texto qualquer', key='4,3,1,2')
+
+print(messageEncrypted)
+
+messageDecrypted = candiruCipher.decrypt(messageEncrypted=messageEncrypted, key='4,3,1,2')
+
+print(messageDecrypted)

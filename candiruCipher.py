@@ -147,8 +147,51 @@ class CandiruCipher:
     aux = aux.replace('*',"")
       
     self.messageRailFence = aux
-    print("RailFence: ", self.messageRailFence)
     
+  def railFenceCipherDecrypt(self, message):
+    self.calc = len(message) / len(self.keyGlobal)
+    
+    if(len(message) % len(self.keyGlobal) > 0):
+      self.calc =int(self.calc) + 1
+
+    self.calc = int(self.calc)
+    
+    limit = len(message) - 1
+    j = 0
+    
+    # quebrar em vetores
+    for i in range(self.calc):
+      temp = []
+      for k in range(len(self.keyGlobal)):
+        if(j <= limit):
+          temp.append(message[j])
+          j += 1
+      self.messageRailFence.append(temp)
+      
+    middleVector = [[0]*len(self.keyGlobal)]*len(self.keyGlobal)
+    
+    keys = []
+    keys.extend(self.keyGlobal)
+    keys.sort()
+    
+    limit = len(self.messageRailFence)
+    
+    l = 0
+    for i in keys:
+      pos = self.keyGlobal.index(i)
+      middleVector[pos] = self.messageRailFence[l]
+      if(l >= limit):
+        l = 0
+      else:  
+        l += 1
+      
+    final = ''
+    for i in range(len(middleVector)):
+      for j in range(len(middleVector)):
+        final += middleVector[j][i]
+    
+    return final.strip()    
+
   def polyalphabeticCipher(self):
   
     aux = []
@@ -165,9 +208,24 @@ class CandiruCipher:
           guard += 1
   
     self.messagePolyalphabetic = "".join(self.messagePolyalphabetic)
-    print("Polyalphabetic: ", self.messagePolyalphabetic)
     
+  def polyalphabeticCipherDecrypt(self, message):
+
+    aux = []
+    aux = list(message)
+    limit = len(aux)
+    guard = 0
     
+    while(guard < limit):
+      for i in range(len(self.keyGlobal)):
+        if(guard < limit):
+          pos = list(self.positionLetter.keys())[list(self.positionLetter.values()).index(aux[guard])]
+          calc = self.keyGlobal[i] % len(self.table[0])
+          self.messagePolyalphabetic.append(self.table[pos][calc]) 
+          guard += 1
+
+    return "".join(self.messagePolyalphabetic) 
+     
   def flowCipher(self):
     final = ''
     pos = 0
@@ -175,20 +233,47 @@ class CandiruCipher:
     for c in self.messagePolyalphabetic:
       result = (ord(c) ^ self.keyGlobal[pos % len(self.keyGlobal)]) ^ self.keyFlow
       pos += 1
-      final += chr(result)
-    print(final)
+      final+= chr(result)
+    
+    return final
   
+  def flowCipherDecrypt(self, message):
+    final = ''
+    pos = 0
+    
+    for c in message:
+      result = (ord(c) ^ self.keyGlobal[pos % len(self.keyGlobal)]) ^ self.keyFlow
+      pos += 1
+      final+= chr(result)
+    
+    return final
 
   def encrypt(self, message, key):
     
     res = key.split(',')
+    final = ''
     res = [int(numeric_string) for numeric_string in res]
     self.keyGlobal = res
     self.encryptingMessage = message
     
     self.railFenceCipher()
     self.polyalphabeticCipher()
-    self.flowCipher()
+    final = self.flowCipher()
+    
+    self.encryptedMessage = final
+    
+    return self.encryptedMessage
   
-  def decrypt(self, messageEncrypted):
-    pass
+  def decrypt(self, messageEncrypted, key):
+    
+    result = self.flowCipherDecrypt(messageEncrypted)
+    
+    self.messagePolyalphabetic = []
+    
+    result = self.polyalphabeticCipherDecrypt(result)
+    
+    self.messageRailFence = []
+    
+    final = self.railFenceCipherDecrypt(result)
+    
+    return final
