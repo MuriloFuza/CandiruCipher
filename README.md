@@ -28,7 +28,7 @@ Saída: atrbxxvbicmtxrbg
 
 ### Passo 3
 
-E por fim cifre a saída do passo 2 utilizando a Cifra Fluxo em cada caracter, utilizando a chave informada como parâmetro e o número constante 217 (ou seja, faça XOR entre cada caracter e índice da chave correspondente, juntamente com o número 11011001, 217 em binário).o resultado da cifra acima é passado por uma cifra de fluxo com a operação XOR e com chave 217 ou 1101100.
+E por fim cifre a saída do passo 2 utilizando a Cifra Fluxo em cada caracter, utilizando a chave informada como parâmetro e o número constante 271 (ou seja, faça XOR entre cada caracter e índice da chave correspondente, juntamente com o número '0b1000011111101100, 271 em binário).o resultado da cifra acima é passado por uma cifra de fluxo com a operação XOR e com chave 271 ou '0b100001111110110.
 
 ## Autores
 

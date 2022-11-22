@@ -9,7 +9,7 @@ class CandiruCipher:
     self.table = []
     self.encryptedMessage = ''
     self.keyGlobal = []
-    self.keyFlow = 217
+    self.keyFlow = 271
     self.messageRailFence = []
     self.messagePolyalphabetic = []
     self.messageFlow = []
